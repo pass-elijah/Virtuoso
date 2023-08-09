@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using Virtuoso.Domain;
 
@@ -31,6 +32,8 @@ public class IndexModel : PageModel
         {"t-shirt", "suit jacket"}
    };
 
+    public List<string> DressingSteps { get; set; } = new();
+
     public IndexModel(ILogger<IndexModel> logger)
     {
         _logger = logger;
@@ -43,18 +46,59 @@ public class IndexModel : PageModel
         // O(1) https://learn.microsoft.com/en-us/dotnet/api/system.array.getlength?view=net-7.0#remarks
         var length = _example.GetLength(0);
 
+        HashSet<string> everyGarmentMap = new();
+
         for (int index = 0; index < length; index++)
         {
             var current = _example[index, 0];
             var depend = _example[index, 1];
-            if (dict.TryGetValue(current, out _))
+            if (!dict.TryGetValue(current, out _))
             {
-                dict[current].Add(depend);
+                dict.Add(current, new());
             }
-            else
+
+            dict[current].Add(depend);
+            everyGarmentMap.Add(depend);
+            everyGarmentMap.Add(current);
+        }
+
+        var dressingOrder = TopoligicalSort(dict, everyGarmentMap);
+
+    }
+
+    private Stack<string> TopoligicalSort(Dictionary<string, List<string>> dependencies, HashSet<string> everyGarment)
+    {
+        Stack<string> order = new();
+        HashSet<string> visited = new();
+
+        foreach (var garment in everyGarment)
+        {
+            if (!visited.Contains(garment))
             {
-                dict.Add(current, new() { depend });
+                TopologicalSortUntil(garment, dependencies, visited, order);
             }
         }
+
+        return order;
+    }
+
+    private void TopologicalSortUntil(string garment, Dictionary<string, List<string>> dependencies, HashSet<string> vistied, Stack<string> order)
+    {
+        if (vistied.Contains(garment))
+        {
+            return;
+        }
+
+        vistied.Add(garment);
+
+        if (dependencies.ContainsKey(garment))
+        {
+            foreach (var dependency in dependencies[garment])
+            {
+                TopologicalSortUntil(dependency, dependencies, vistied, order);
+            }
+        }
+
+        order.Push(garment);
     }
 }
