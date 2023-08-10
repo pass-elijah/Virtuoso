@@ -8,11 +8,6 @@ namespace Virtuoso.Domain.Services;
 
 public class TopologicalService : ITopologicalService
 {
-    public Stack<string> Sort(string[,] input)
-    {
-        throw new NotImplementedException();
-    }
-
     public List<string> SortAndStratify(string[,] input)
     {
         throw new NotImplementedException();
