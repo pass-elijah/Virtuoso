@@ -41,7 +41,7 @@ public class IndexModel : PageModel
 
     public void OnGet()
     {
-        var dict = new Dictionary<string, List<string>>();
+        var dict = new Dictionary<string, HashSet<string>>();
 
         // O(1) https://learn.microsoft.com/en-us/dotnet/api/system.array.getlength?view=net-7.0#remarks
         var length = _example.GetLength(0);
@@ -64,9 +64,16 @@ public class IndexModel : PageModel
 
         var dressingOrder = TopoligicalSort(dict, everyGarmentMap);
 
+        HashSet<string> currentLine = new();
+
+        foreach(var garment in dressingOrder) 
+        {
+            
+        }
+
     }
 
-    private Stack<string> TopoligicalSort(Dictionary<string, List<string>> dependencies, HashSet<string> everyGarment)
+    private Stack<string> TopoligicalSort(Dictionary<string, HashSet<string>> dependencies, HashSet<string> everyGarment)
     {
         Stack<string> order = new();
         HashSet<string> visited = new();
@@ -82,7 +89,7 @@ public class IndexModel : PageModel
         return order;
     }
 
-    private void TopologicalSortUntil(string garment, Dictionary<string, List<string>> dependencies, HashSet<string> vistied, Stack<string> order)
+    private void TopologicalSortUntil(string garment, Dictionary<string, HashSet<string>> dependencies, HashSet<string> vistied, Stack<string> order)
     {
         if (vistied.Contains(garment))
         {
