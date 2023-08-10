@@ -50,7 +50,7 @@ sorted, comma separated.
 
 Therefore, the output for this sample file would be:
 
-left sock,right sock, t-shirt
+left sock, right sock, t-shirt
 dress shirt
 pants, tie
 belt
