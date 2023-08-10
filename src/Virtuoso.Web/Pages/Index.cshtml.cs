@@ -65,12 +65,29 @@ public class IndexModel : PageModel
         var dressingOrder = TopoligicalSort(dict, everyGarmentMap);
 
         HashSet<string> currentLine = new();
+        HashSet<string> resetIfSee = new();
 
         foreach(var garment in dressingOrder) 
         {
-            
+            if (resetIfSee.Contains(garment))
+            {
+                DressingSteps.Add(string.Join(", ", currentLine));
+                resetIfSee.Clear();
+                currentLine.Clear();
+            }
+
+            if (dict.ContainsKey(garment))
+            {
+                resetIfSee.UnionWith(dict[garment]);
+            }
+
+            currentLine.Add(garment);
         }
 
+        if (currentLine.Count > 0)
+        {
+            DressingSteps.Add(string.Join(", ", currentLine));
+        }
     }
 
     private Stack<string> TopoligicalSort(Dictionary<string, HashSet<string>> dependencies, HashSet<string> everyGarment)
