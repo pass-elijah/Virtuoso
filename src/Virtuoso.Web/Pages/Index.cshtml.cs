@@ -71,7 +71,7 @@ public class IndexModel : PageModel
         {
             if (resetIfSee.Contains(garment))
             {
-                DressingSteps.Add(string.Join(", ", currentLine));
+                DressingSteps.Add(string.Join(", ", currentLine.Order()));
                 resetIfSee.Clear();
                 currentLine.Clear();
             }
