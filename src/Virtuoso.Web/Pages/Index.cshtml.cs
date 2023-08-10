@@ -14,6 +14,8 @@ public class IndexModel : PageModel
 
     public List<string> DressingSteps { get; set; } = new();
 
+    public string GraphInput { get; set; }
+
     public IndexModel(ILogger<IndexModel> logger, ITopologicalService toposervice)
     {
         _logger = logger;
@@ -22,5 +24,10 @@ public class IndexModel : PageModel
 
     public void OnGet()
     {
+    }
+
+    public void OnPost()
+    {
+
     }
 }
