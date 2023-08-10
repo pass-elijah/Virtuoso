@@ -1,7 +1,10 @@
+using Virtuoso.Domain.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddSingleton<ITopologicalService, TopologicalService>();
 
 var app = builder.Build();
 
