@@ -4,7 +4,8 @@
 The approach I've modeled is the onion architecture. At the core is the domain that contains the interfaces and domain service implementations
 that everything points to. In the middle sits the infrastrucure layer which, for now, has the implementation for filesystem access for the console
 program. Ideally, anything touching the infrastrucure should be using dependency injection and getting the inerface from the Domain but I didn't
-want to over-complicate the console application. 
+want to over-complicate the console application which should technically sit on the last layer. There was a Web project, but I removed it for the
+sake of time. 
 
 ## Problem Statement
 You can provide you solution however you see fit.
