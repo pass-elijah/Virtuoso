@@ -8,7 +8,7 @@ namespace Virtuoso.Domain.Services;
 
 public class TopologicalService : ITopologicalService
 {
-    public List<string> SortAndStratify(string[,] input)
+    public List<string> SortAndStratify(string[][] input)
     {
         var dict = new Dictionary<string, HashSet<string>>();
         List<string> dressingSteps = new();
@@ -20,8 +20,8 @@ public class TopologicalService : ITopologicalService
 
         for (int index = 0; index < length; index++)
         {
-            var current = input[index, 0];
-            var depend = input[index, 1];
+            var current = input[index][0];
+            var depend = input[index][1];
             if (!dict.TryGetValue(current, out _))
             {
                 dict.Add(current, new());

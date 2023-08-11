@@ -8,5 +8,5 @@ namespace Virtuoso.Domain.Services;
 
 public interface ITopologicalService
 {
-    public List<string> SortAndStratify(string[,] input);
+    public List<string> SortAndStratify(string[][] input);
 }

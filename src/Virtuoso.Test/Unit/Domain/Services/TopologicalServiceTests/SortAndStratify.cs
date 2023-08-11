@@ -19,26 +19,26 @@ public class SortAndStratify
     [Fact]
     public void ProblemStatement()
     {
-        string[,] input = new string[,]
+        List<List<string>> input = new()
         {
-            {"t-shirt", "dress shirt"},
-            {"dress shirt", "pants"},
-            {"dress shirt", "suit jacket"},
-            {"tie", "suit jacket"},
-            {"pants", "suit jacket"},
-            {"belt", "suit jacket"},
-            {"suit jacket", "overcoat"},
-            {"dress shirt", "tie"},
-            {"suit jacket", "sun glasses"},
-            {"sun glasses", "overcoat"},
-            {"left sock", "pants"},
-            {"pants", "belt"},
-            {"suit jacket", "left shoe"},
-            {"suit jacket", "right shoe"},
-            {"left shoe", "overcoat"},
-            {"right sock", "pants"},
-            {"right shoe", "overcoat"},
-            {"t-shirt", "suit jacket"}
+            new() {"t-shirt", "dress shirt"},
+            new() { "dress shirt", "pants" },
+            new() { "dress shirt", "suit jacket" },
+            new() { "tie", "suit jacket" },
+            new() { "pants", "suit jacket" },
+            new() { "belt", "suit jacket" },
+            new() { "suit jacket", "overcoat" },
+            new() { "dress shirt", "tie" },
+            new() { "suit jacket", "sun glasses" },
+            new() { "sun glasses", "overcoat" },
+            new() { "left sock", "pants" },
+            new() { "pants", "belt" },
+            new() { "suit jacket", "left shoe" },
+            new() { "suit jacket", "right shoe" },
+            new() { "left shoe", "overcoat" },
+            new() { "right sock", "pants" },
+            new() { "right shoe", "overcoat" },
+            new() { "t-shirt", "suit jacket" }
         };
 
         var expected = new List<string>
@@ -52,7 +52,7 @@ public class SortAndStratify
             "overcoat"
         };
 
-        var actual = _toposervice.SortAndStratify(input);
+        var actual = _toposervice.SortAndStratify(input.Select(a => a.ToArray()).ToArray());
 
         Assert.Equal(expected, actual);
     }
