@@ -56,4 +56,27 @@ public class SortAndStratify
 
         Assert.Equal(expected, actual);
     }
+
+    [Fact]
+    public void Ppe()
+    {
+        List<List<string>> input = new()
+        {
+            new() {"undershirt", "fire-proof shirt"},
+            new() { "fire-proof shirt", "CO monitor"},
+            new() { "underpants", "fire-proof pants" }
+        };
+
+        var expected = new List<string>
+        {
+            "underpants",
+            "fire-proof pants, undershirt",
+            "fire-proof shirt",
+            "CO monitor",
+        };
+
+        var actual = _toposervice.SortAndStratify(input.Select(a => a.ToArray()).ToArray());
+
+        Assert.Equal(expected, actual);
+    }
 }
