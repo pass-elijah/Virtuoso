@@ -1,5 +1,12 @@
 # Virtuoso
 
+## Structure
+The approach I've modeled is the onion architecture. At the core is the domain that contains the interfaces and domain service implementations
+that everything points to. In the middle sits the infrastrucure layer which, for now, has the implementation for filesystem access for the console
+program. Ideally, anything touching the infrastrucure should be using dependency injection and getting the inerface from the Domain but I didn't
+want to over-complicate the console application. 
+
+## Problem Statement
 You can provide you solution however you see fit.
 
 Some options that we have used in the past are BitBucket, GitHub, https://dotnetfiddle.net/, or a zip file emailed.
