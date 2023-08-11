@@ -22,3 +22,8 @@ while ((line = streamReader.ReadLine()) != null)
 var topoGraphService = new TopologicalService();
 
 var dressingOrder = topoGraphService.SortAndStratify(input.ToArray());
+
+foreach (var writeline in dressingOrder)
+{
+   Console.WriteLine(writeline);
+}
